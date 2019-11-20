@@ -11,9 +11,9 @@ def sum_multiples_3_5(n=1000):
     """
 
     natural_numbers = np.arange(n)
-    mask_mult_3 = natural_numbers%3==0
-    mask_mult_5 = natural_numbers%5==0
-    mask_mult_3_5 = mask_mult_3 + mask_mult_5
+    mask_mult_3 = natural_numbers%3==0 # Multiples of 3
+    mask_mult_5 = natural_numbers%5==0 # Multiples of 5
+    mask_mult_3_5 = mask_mult_3 + mask_mult_5 # Multiples of 3 and 5
     mult_3_5 = natural_numbers[mask_mult_3_5]
 
     return mult_3_5.sum()
