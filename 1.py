@@ -2,7 +2,7 @@ import numpy as np
 import unittest
 
 """
-Find the sum of the multiples of 3 of 5 below 1000.
+Find the sum of the multiples of 3 of 5 below N.
 """
 
 def sum_multiples_3_5(n=1000):

@@ -2,7 +2,7 @@ import numpy as np
 import unittest
 
 """
-Find the sum of the even Fibonacci numbers below 4 million.
+Find the sum of the even Fibonacci numbers below N.
 """
 
 def fibonacci(cutoff):

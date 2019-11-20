@@ -2,7 +2,7 @@ import numpy as np
 import unittest
 
 """
-Find the largest prime factor of the number 600851475143.
+Find the largest prime factor of a large number.
 """
 
 def find_primes(n):

@@ -2,7 +2,7 @@ import numpy as np
 import unittest
 
 """
-Find the largest palindrome made from the product of two 3-digit numbers.
+Find the largest palindrome made from the product of two N-digit numbers.
 """
 
 def check_palindrome(n):
