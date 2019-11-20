@@ -17,3 +17,4 @@ Note that sharing code based on the current problems is against the competition 
 5) Find the smallest positive number that is evenly divisible by all of the numbers from 1 to N
 6) Find the difference between the sum of squares and the square of the sum of N natural numbers
 7) Find the Nth prime
+8) Find largest product of adjacent digits in sequence
