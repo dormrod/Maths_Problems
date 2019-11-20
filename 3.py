@@ -79,8 +79,21 @@ class TestProblem3(unittest.TestCase):
     Test solution.
     """
 
+    def test_primes(self):
+        primes_lt_20 = np.array([2,3,5,7,11,13,17,19])
+        primes = find_primes(20)
+        self.assertEqual(np.all(primes-primes_lt_20==0),True)
+
+    def test_prime_factors(self):
+        prime_factors_11 = np.array([11])
+        prime_factors_20 = np.array([2,2,5])
+        self.assertEqual(np.all(find_prime_factors(11)-prime_factors_11==0),True)
+        self.assertEqual(np.all(find_prime_factors(20)-prime_factors_20==0),True)
+
     def test_answer(self):
-        self.assertEqual(highest_prime_factor(600851475143), 6857)
+        answer = highest_prime_factor(600851475143)
+        print('Answer: {}'.format(answer))
+        self.assertEqual(answer, 6857)
 
 
 if __name__ == "__main__":

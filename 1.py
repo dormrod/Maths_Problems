@@ -25,7 +25,9 @@ class TestProblem1(unittest.TestCase):
     """
 
     def test_answer(self):
-        self.assertEqual(sum_multiples_3_5(1000), 233168)
+        answer = sum_multiples_3_5(1000)
+        print('Answer: {}'.format(answer))
+        self.assertEqual(answer, 233168)
 
 
 if __name__ == "__main__":

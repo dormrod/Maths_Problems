@@ -53,8 +53,15 @@ class TestProblem2(unittest.TestCase):
     Test solution.
     """
 
+    def test_fibonacci(self):
+        seq = fibonacci(1000)
+        fib = np.all(seq[:-2]+seq[1:-1]==seq[2:])
+        self.assertEqual(fib,True)
+
     def test_answer(self):
-        self.assertEqual(sum_even_fibonacci(4e6), 4613732)
+        answer = sum_even_fibonacci(4e6)
+        print('Answer: {}'.format(answer))
+        self.assertEqual(answer, 4613732)
 
 
 if __name__ == "__main__":
