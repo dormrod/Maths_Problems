@@ -2,13 +2,15 @@
 
 Solutions to the maths problems, inspired by [Project Euler](https://projecteuler.net/).
 
-Each problem has associated tests that will be run on executing the script.
+Each problem has associated tests that will be run on executing the script, and takes less than a minute to complete.
 
 These are solutions based on archived problems that have been solved countless times.
 
 Note that sharing code based on the current problems is against the competition rules, so if you try these yourself be mindful of this.
 
 ### List of problems
+
+Favourite problems are highlighted
 
 1) Find the sum of the multiples of 3 of 5 below N 
 2) Find the sum of the even Fibonacci numbers below N
@@ -20,3 +22,5 @@ Note that sharing code based on the current problems is against the competition 
 8) Find largest product of adjacent digits in sequence
 9) Find Pythagorean triplets which sum to a given number
 10) Find sum of all primes below N
+11) Find greatest product in grid
+12) **Find highly divisible triangle numbers**
