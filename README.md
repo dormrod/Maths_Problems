@@ -18,3 +18,5 @@ Note that sharing code based on the current problems is against the competition 
 6) Find the difference between the sum of squares and the square of the sum of N natural numbers
 7) Find the Nth prime
 8) Find largest product of adjacent digits in sequence
+9) Find Pythagorean triplets which sum to a given number
+10) Find sum of all primes below N
