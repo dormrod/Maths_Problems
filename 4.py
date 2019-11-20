@@ -70,4 +70,3 @@ if __name__ == "__main__":
 
     unittest.main()
 
-largest_palindrome(2)
