@@ -24,3 +24,6 @@ Favourite problems are highlighted
 10) Find sum of all primes below N
 11) Find greatest product in grid
 12) **Find highly divisible triangle numbers**
+13) Find first digits of a sum of large numbers
+14) Find longest Collatz sequence below N
+15) **Find the number of lattice paths through grid of given dimensions**
