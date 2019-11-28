@@ -27,3 +27,13 @@ Favourite problems are highlighted
 13) Find first digits of a sum of large numbers
 14) Find longest Collatz sequence below N
 15) **Find the number of lattice paths through grid of given dimensions**
+16) Find sum of digits of extremely large number
+17) Convert numbers to words
+18) Find maximum path sum through triangle
+19) How many Sundays fell on the first of the month during the 20th century?
+20) Find sum of digits of large factorial
+21) Find sum of amicable numbers below N
+22) Find scores of list of names
+23) Find sum of all positive integers that cannot be written as the sum of two abundant numbers
+24) Find nth lexicographic permutations of number range
+25) Find first Fibonacci number with N digits
