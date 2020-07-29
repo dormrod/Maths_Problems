@@ -43,8 +43,7 @@ class TestProblem22(unittest.TestCase):
     def test_name_scores(self):
         answer = name_scores(names)
         print('Answer: {}'.format(answer))
-        # self.assertEqual(answer,1074)
-
+        self.assertEqual(answer,871198282)
 
 
 if __name__ == "__main__":
