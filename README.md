@@ -1,14 +1,18 @@
-## Solutions to Computational Maths Problems
+# Solutions to Computational Maths Problems
 
 Solutions to the maths problems, inspired by [Project Euler](https://projecteuler.net/).
 
 Each problem has associated tests that will be run on executing the script, and takes less than a minute to complete.
 
+Problems are solved either using Python or F# (using a functional approach).
+
 These are solutions based on archived problems that have been solved countless times.
 
 Note that sharing code based on the current problems is against the competition rules, so if you try these yourself be mindful of this.
 
-### List of problems
+## List of problems
+
+### Python Solutions
 
 Favourite problems are highlighted
 
@@ -37,3 +41,7 @@ Favourite problems are highlighted
 23) Find sum of all positive integers that cannot be written as the sum of two abundant numbers
 24) Find nth lexicographic permutations of number range
 25) Find first Fibonacci number with N digits
+
+### F# Solutions
+
+40) Find the nth digit of Champernowne's constant
