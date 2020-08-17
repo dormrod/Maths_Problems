@@ -44,4 +44,6 @@ Favourite problems are highlighted
 
 ### F# Solutions
 
+30) Sum of numbers written as fifth power of digits
 40) Find the nth digit of Champernowne's constant
+45) Common triangular, pentagonal and hexagonal numbers
