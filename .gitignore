@@ -1,2 +1,7 @@
-.idea/
-__pycache__/
+*/.idea/
+python/__pycache__/
+csharp/ProjectEuler.UnitTests/bin/
+csharp/ProjectEuler.UnitTests/packages/
+csharp/ProjectEuler.UnitTests/obj
+*.xml
+*DotSettings.user
