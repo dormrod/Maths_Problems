@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 
 namespace ProjectEuler.UnitTests
@@ -42,8 +43,8 @@ namespace ProjectEuler.UnitTests
                 throw new ArgumentException("Value must be greater than zero.");
             
             var currentValue = value;
-            var currentPrime = 2;
-            var primes = new List<long>();
+            long currentPrime = 2;
+            var primes = Array.Empty<long>();
 
             while (true)
             {
@@ -60,39 +61,46 @@ namespace ProjectEuler.UnitTests
                 }
                 else
                 {
-                    NextPrime();
-                }
-            }
-
-            void NextPrime()
-            {
-                var nextPrime = currentPrime + 1;
-                while (true)
-                {
-                    var maxPossiblePrime = (long) Math.Sqrt(nextPrime);
-
-                    bool isPrime = true;
-                    foreach (var p in primes)
-                    {
-                        if (p > maxPossiblePrime)
-                            break;
-
-                        if (nextPrime % p == 0)
-                            isPrime = false;
-                    }
-
-                    if (isPrime)
-                    {
-                        currentPrime = nextPrime;
-                        primes.Add(currentPrime);
-                        return;
-                    }
-
-                    ++nextPrime;
+                    primes = AddNextPrime(primes);
+                    currentPrime = primes.Last();
                 }
             }
         }
 
+        /// <summary>
+        /// Given sequence of primes, generate next prime
+        /// </summary>
+        public static long[] AddNextPrime(long[] primes)
+        {
+            if (primes.Length == 0)
+                return primes.Append(2).ToArray();
+
+            var currentPrime = primes.Last();
+            var nextPrime = currentPrime + 1;
+            while (true)
+            {
+                var maxPossiblePrime = (long) Math.Sqrt(nextPrime);
+
+                bool isPrime = true;
+                foreach (var p in primes)
+                {
+                    if (p > maxPossiblePrime)
+                        break;
+
+                    if (nextPrime % p == 0)
+                        isPrime = false;
+                }
+
+                if (isPrime)
+                {
+                    currentPrime = nextPrime;
+                    return primes.Append(currentPrime).ToArray();
+                }
+            
+                ++nextPrime;
+            }
+        }
+        
         /// <summary>
         /// Convert integer to an array of composite digits,
         /// where the array index corresponds to the nth power of 10.
