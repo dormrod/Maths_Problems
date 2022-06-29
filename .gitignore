@@ -1,7 +1,7 @@
 */.idea/
 python/__pycache__/
-csharp/ProjectEuler.UnitTests/bin/
-csharp/ProjectEuler.UnitTests/packages/
-csharp/ProjectEuler.UnitTests/obj
+csharp/ProjectEuler/bin/
+csharp/ProjectEuler/packages/
+csharp/ProjectEuler/obj
 *.xml
 *DotSettings.user
