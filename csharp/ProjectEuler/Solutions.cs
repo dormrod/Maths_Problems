@@ -32,7 +32,7 @@ namespace ProjectEuler
         [TestCase(4000000, 4613732)]
         public void Problem2(int cutoff, int expected)
         {
-            var answer = TestHelpers.FibonacciSequence(cutoff)
+            var answer = SolutionHelpers.FibonacciSequence(cutoff)
                 .Where(x => x.Value % 2 == 0)
                 .Sum(x => x.Value);
 
@@ -44,7 +44,7 @@ namespace ProjectEuler
         [TestCase(600851475143, 6857)]
         public void Problem3(long value, int expected)
         {
-            var answer = TestHelpers.PrimeFactors(value, _primeCache).Last();
+            var answer = SolutionHelpers.PrimeFactors(value, _primeCache).Last();
 
             Assert.That(answer, Is.EqualTo(expected));
         }
@@ -58,7 +58,7 @@ namespace ProjectEuler
                 .Select(v => new
                 {
                     Value = v,
-                    Digits = TestHelpers.ToDigits(v)
+                    Digits = SolutionHelpers.ToDigits(v)
                 })
                 .Where(x => x.Digits
                     .Zip(
@@ -76,7 +76,7 @@ namespace ProjectEuler
         {
             var answer = Enumerable.Range(1, max)
                 .SelectMany(i =>
-                    TestHelpers
+                    SolutionHelpers
                         .PrimeFactors(i, _primeCache)
                         .Select(Convert.ToInt32)
                         .GroupBy(f => f)

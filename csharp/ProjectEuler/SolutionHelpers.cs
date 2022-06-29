@@ -4,7 +4,7 @@ using ProjectEuler.Common;
 
 namespace ProjectEuler
 {
-    public static class TestHelpers
+    public static class SolutionHelpers
     {
         /// <summary>
         /// Generate Fibonacci sequence with values less than the provided cutoff.
