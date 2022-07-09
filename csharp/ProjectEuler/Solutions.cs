@@ -55,10 +55,11 @@ namespace ProjectEuler
         {
             var answer = Enumerable.Range(1, max)
                 .SelectMany(i => Enumerable.Range(i, max - i + 1).Select(j => i * j))
-                .Select(v => new
+                .Select(v => new NaturalNumber(v))
+                .Select(n => new
                 {
-                    Value = v,
-                    Digits = SolutionHelpers.ToDigits(v)
+                    Value = n.GetValue(),
+                    Digits = n.GetDigits().ToArray()
                 })
                 .Where(x => x.Digits
                     .Zip(

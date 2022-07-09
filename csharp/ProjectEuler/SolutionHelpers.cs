@@ -65,27 +65,5 @@ namespace ProjectEuler
 
             return factors;
         }
-
-        /// <summary>
-        /// Convert integer to an array of composite digits,
-        /// where the array index corresponds to the nth power of 10.
-        /// </summary>
-        public static IEnumerable<int> ToDigits(int value)
-        {
-            var remainder = value;
-            var digits = new List<int>();
-            
-            while (true)
-            {
-                var digit = remainder % 10;
-                remainder = (remainder - digit) / 10;
-                digits.Add(digit);
-                
-                if (remainder == 0)
-                    break;
-            }
-
-            return digits;
-        }
     }
 }

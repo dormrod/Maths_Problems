@@ -67,5 +67,19 @@ namespace ProjectEuler
 
             Assert.DoesNotThrow(() => sut.NextValue(maxValue));
         }
+        
+        [TestCase(0, new [] {0}, new [] {0})]
+        [TestCase(1, new [] {1}, new [] {1})]
+        [TestCase(2, new [] {2}, new [] {0, 1})]
+        [TestCase(10, new [] {0, 1}, new [] {0, 1, 0, 1})]
+        [TestCase(123456789, new [] {9, 8, 7, 6, 5, 4, 3, 2, 1}, new [] {1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1})]
+        [TestCase(12345678900000, new [] {0, 0, 0, 0, 0, 9, 8, 7, 6, 5, 4, 3, 2, 1}, new [] {0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1})]
+        public void NaturalNumber_CanGetDigits_InBaseTenOrTwo_Successfully(long value, int[] expectedBase10, int[] expectedBase2)
+        {
+            var sut = new NaturalNumber(value);
+            
+            Assert.That(sut.GetDigits().ToArray(), Is.EqualTo(expectedBase10));
+            Assert.That(sut.GetDigits(2).ToArray(), Is.EqualTo(expectedBase2));
+        }
     }
 }
