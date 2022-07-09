@@ -271,5 +271,16 @@ namespace ProjectEuler
                     : 0;
             }
         }
+        
+        [TestCase(5, 28)]
+        [TestCase(500, 76576500)]
+        public void Problem12(int minDivisors, int expected)
+        {
+            var answer = Enumerable.Range(0, int.MaxValue)
+                .Select(i => i * (i + 1) / 2)
+                .First(i => new NaturalNumber(i).GetFactors(_primeCache).Count() > minDivisors);
+
+            Assert.That(answer, Is.EqualTo(expected));
+        }
     }
 }
