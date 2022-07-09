@@ -81,5 +81,21 @@ namespace ProjectEuler
             Assert.That(sut.GetDigits().ToArray(), Is.EqualTo(expectedBase10));
             Assert.That(sut.GetDigits(2).ToArray(), Is.EqualTo(expectedBase2));
         }
+        
+        [TestCase(0, new int[0])]
+        [TestCase(1, new int[0])]
+        [TestCase(2, new [] {2})]
+        [TestCase(10, new [] {2, 5})]
+        [TestCase(43, new [] {43})]
+        [TestCase(100, new [] {2, 2, 5, 5})]
+        [TestCase(1_000_001, new [] {101, 9901})]
+        public void NaturalNumber_CanGetPrimeFactors_Successfully(long value, int[] expected)
+        {
+            var primeCache = new PrimeCache();
+            
+            var sut = new NaturalNumber(value);
+            
+            Assert.That(sut.GetPrimeFactors(primeCache).ToArray(), Is.EqualTo(expected));
+        }
     }
 }

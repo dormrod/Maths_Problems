@@ -44,7 +44,7 @@ namespace ProjectEuler
         [TestCase(600851475143, 6857)]
         public void Problem3(long value, int expected)
         {
-            var answer = SolutionHelpers.PrimeFactors(value, _primeCache).Last();
+            var answer = new NaturalNumber(value).GetPrimeFactors(_primeCache).Last();
 
             Assert.That(answer, Is.EqualTo(expected));
         }
@@ -77,8 +77,8 @@ namespace ProjectEuler
         {
             var answer = Enumerable.Range(1, max)
                 .SelectMany(i =>
-                    SolutionHelpers
-                        .PrimeFactors(i, _primeCache)
+                    new NaturalNumber(i)
+                        .GetPrimeFactors(_primeCache)
                         .Select(Convert.ToInt32)
                         .GroupBy(f => f)
                         .Select(g => new KeyValuePair<int, int>(g.Key, g.Count())))
