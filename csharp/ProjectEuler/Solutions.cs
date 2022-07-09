@@ -115,7 +115,7 @@ namespace ProjectEuler
             var maxPrime = 10000;
             while (primes.Length < n)
             {
-                primes = _primeCache.GetPrimes(maxPrime).ToArray();
+                primes = _primeCache.GetValues(maxPrime).ToArray();
                 maxPrime *= 10;
             }
 
@@ -188,7 +188,7 @@ namespace ProjectEuler
         [TestCase(2_000_000, 142913828922)]
         public void Problem10(int max, long expected)
         {
-            var answer = _primeCache.GetPrimes(max).Sum();
+            var answer = _primeCache.GetValues(max).Sum();
             
             Assert.That(answer, Is.EqualTo(expected));
         }

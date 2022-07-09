@@ -10,42 +10,32 @@ namespace ProjectEuler.Common
     /// <remarks>
     /// Not thread safe.
     /// </remarks>
-    public class PrimeCache
+    public sealed class PrimeCache : SequenceCache
     {
-        private long[] _primes;
+        public PrimeCache(long maxValue = 2)
+            => GenerateSequence(maxValue);
 
-        public long[] CurrentPrimes => _primes;
-        
-        public PrimeCache(long max = 2)
+        protected override void GenerateNextValue()
         {
-            _primes = Array.Empty<long>();
-            GeneratePrimes(max);
-        }
-
-        public IEnumerable<long> GetPrimes(long max)
-        {
-            if (max > _primes.LastOrDefault())
-                GeneratePrimes(max);
-            
-            // The primes must be sorted so can break as soon as the limit is reached
-            foreach (var prime in _primes)
+            // Generate sequence for odd numbers until find another prime
+            var startLength = Sequence.LongLength;
+            var value = Sequence.Last() + 2;
+            while (startLength == Sequence.Length)
             {
-                if (prime > max)
-                    yield break;
-
-                yield return prime;
+                GenerateSequence(value);
+                value += 2;
             }
         }
-
-        private void GeneratePrimes(long max)
+        
+        protected override void GenerateSequence(long maxValue)
         {
             // First prime is 2
-            if (max <= 1)
+            if (maxValue <= 1)
                 throw new ArgumentException("Maximum prime value must be greater than 1");
             
-            // Only want to check the next N values for primes
-            var startValue = Math.Max(_primes.LastOrDefault() + 1, 2);
-            var endValue = max;
+            // Only want to check the next N sequence for primes
+            var startValue = Math.Max(Sequence.LastOrDefault() + 1, 2);
+            var endValue = maxValue;
             var numberOfValues = endValue - startValue + 1;
             
             // Sieve of Eratosthenes, set multiples of primes to false
@@ -56,7 +46,7 @@ namespace ProjectEuler.Common
             }
             
             // First check primes in cache, taking first value as closest multiple
-            foreach (long prime in _primes)
+            foreach (long prime in Sequence)
             {
                 long j = (long) Math.Ceiling((decimal) startValue / prime) * prime - startValue;
                 while (j < numberOfValues)
@@ -86,7 +76,7 @@ namespace ProjectEuler.Common
                 ++currentValue;
             }
 
-            // Add values to cache which have no prime factors
+            // Add sequence to cache which have no prime factors
             var value = startValue;
             var additionalPrimes = new List<long>();
             foreach (var valueIsPrime in isPrime)
@@ -97,7 +87,7 @@ namespace ProjectEuler.Common
                 ++value;
             }
 
-            _primes = _primes.Concat(additionalPrimes).ToArray();
+            Sequence = Sequence.Concat(additionalPrimes).ToArray();
         }
     }
 }

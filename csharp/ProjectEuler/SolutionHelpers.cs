@@ -47,7 +47,7 @@ namespace ProjectEuler
             var maxPrime = Math.Min(value, 1000);
             while (currentValue != 1)
             {
-                var primes = primeCache.GetPrimes(maxPrime);
+                var primes = primeCache.GetValues(maxPrime);
                 foreach (var prime in primes)
                 {
                     while (currentValue % prime == 0)

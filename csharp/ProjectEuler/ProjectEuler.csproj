@@ -42,7 +42,9 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Common\ISequenceCache.cs" />
         <Compile Include="Common\PrimeCache.cs" />
+        <Compile Include="Common\SequenceCache.cs" />
         <Compile Include="SolutionHelpers.cs" />
         <Compile Include="Solutions.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
