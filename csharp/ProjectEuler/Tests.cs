@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using NUnit.Framework;
 using ProjectEuler.Common;
 
@@ -67,20 +68,50 @@ namespace ProjectEuler
 
             Assert.DoesNotThrow(() => sut.NextValue(maxValue));
         }
+
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(100)]
+        [TestCase(1_000_000)]
+        [TestCase(1_000_000_000_000)]
+        public void NaturalNumber_CanBeInitialisedWithNaturalValue_Successfully(long value)
+            => Assert.DoesNotThrow(() => new NaturalNumber(value));
         
-        [TestCase(0, new [] {0}, new [] {0})]
-        [TestCase(1, new [] {1}, new [] {1})]
-        [TestCase(2, new [] {2}, new [] {0, 1})]
-        [TestCase(10, new [] {0, 1}, new [] {0, 1, 0, 1})]
-        [TestCase(123456789, new [] {9, 8, 7, 6, 5, 4, 3, 2, 1}, new [] {1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1})]
-        [TestCase(12345678900000, new [] {0, 0, 0, 0, 0, 9, 8, 7, 6, 5, 4, 3, 2, 1}, new [] {0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1})]
-        public void NaturalNumber_CanGetDigits_InBaseTenOrTwo_Successfully(long value, int[] expectedBase10, int[] expectedBase2)
+        [TestCase(-1)]
+        public void NaturalNumber_WhenInitialisedWithNegativeValue_Throws(long value)
+            => Assert.Throws<ArgumentException>(() => new NaturalNumber(value));
+
+        [TestCase("0",new [] {0}, (long) 0)]
+        [TestCase("1", new [] {1}, (long) 1)]
+        [TestCase("2", new [] {2}, (long) 2)]
+        [TestCase("100", new [] {0, 0, 1}, (long) 100)]
+        [TestCase("00123", new [] {3, 2, 1}, (long) 123)]
+        [TestCase("1000000", new [] {0, 0, 0, 0, 0, 0, 1}, (long) 1_000_000)]
+        [TestCase("1000000000123", new [] {3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 1_000_000_000_123)]
+        [TestCase("1000000000000000000123", new [] {3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, null)]
+        public void NaturalNumber_CanBeInitialisedWithStringValue_Successfully(string value, int[] expectedDigits, long? expectedValue)
         {
             var sut = new NaturalNumber(value);
             
-            Assert.That(sut.GetDigits().ToArray(), Is.EqualTo(expectedBase10));
-            Assert.That(sut.GetDigits(2).ToArray(), Is.EqualTo(expectedBase2));
+            Assert.That(sut.GetDigits(), Is.EqualTo(expectedDigits));
+            if (expectedValue != null)
+            {
+                Assert.That(sut.Value, Is.EqualTo(expectedValue));
+            }
+            else
+            {
+                Assert.Throws<InvalidCastException>(() =>
+                {
+                    _= sut.Value;
+                });
+            }
         }
+        
+        [TestCase("123.345")]
+        [TestCase("123a")]
+        public void NaturalNumber_WhenInitialisedWithInvalidStringValue_Throws(string value)
+            => Assert.Throws<ArgumentException>(() => new NaturalNumber(value));
         
         [TestCase(0, new long[0])]
         [TestCase(1, new long[0])]
@@ -113,6 +144,20 @@ namespace ProjectEuler
             var sut = new NaturalNumber(value);
             
             Assert.That(sut.GetFactors(primeCache).ToArray(), Is.EqualTo(expected));
+        }
+        
+        [TestCase(0, 0, 0)] 
+        [TestCase(1, 2, 3)] 
+        [TestCase(2, 1, 3)] 
+        [TestCase(199, 99, 298)] 
+        [TestCase(1_000_001, 99, 1_000_100)] 
+        public void NaturalNumber_CanSumValues_Successfully(long value1, long value2, long expected)
+        {
+            var sut = new NaturalNumber(value1);
+
+            var actual = sut.Add(new NaturalNumber(value2));
+            
+            Assert.That(actual.Value, Is.EqualTo(expected));
         }
     }
 }
