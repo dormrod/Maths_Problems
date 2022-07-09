@@ -82,20 +82,37 @@ namespace ProjectEuler
             Assert.That(sut.GetDigits(2).ToArray(), Is.EqualTo(expectedBase2));
         }
         
-        [TestCase(0, new int[0])]
-        [TestCase(1, new int[0])]
-        [TestCase(2, new [] {2})]
-        [TestCase(10, new [] {2, 5})]
-        [TestCase(43, new [] {43})]
-        [TestCase(100, new [] {2, 2, 5, 5})]
-        [TestCase(1_000_001, new [] {101, 9901})]
-        public void NaturalNumber_CanGetPrimeFactors_Successfully(long value, int[] expected)
+        [TestCase(0, new long[0])]
+        [TestCase(1, new long[0])]
+        [TestCase(2, new long[] {2})]
+        [TestCase(10, new long[] {2, 5})]
+        [TestCase(43, new long[] {43})]
+        [TestCase(100, new long[] {2, 2, 5, 5})]
+        [TestCase(1_000_001, new long[] {101, 9901})]
+        public void NaturalNumber_CanGetPrimeFactors_Successfully(long value, long[] expected)
         {
             var primeCache = new PrimeCache();
             
             var sut = new NaturalNumber(value);
             
             Assert.That(sut.GetPrimeFactors(primeCache).ToArray(), Is.EqualTo(expected));
+        }
+        
+        [TestCase(0, new long[0])]
+        [TestCase(1, new long[] {1})]
+        [TestCase(2, new long[] {1, 2})]
+        [TestCase(10, new long[] {1, 2, 5, 10})]
+        [TestCase(28, new long[] {1, 2, 4, 7, 14, 28})]
+        [TestCase(43, new long[] {1, 43})]
+        [TestCase(100, new long[] {1, 2, 4, 5, 10, 20, 25, 50, 100})]
+        [TestCase(1000001, new long[] {1, 101, 9901, 1000001})]
+        public void NaturalNumber_CanGetFactors_Successfully(long value, long[] expected)
+        {
+            var primeCache = new PrimeCache();
+            
+            var sut = new NaturalNumber(value);
+            
+            Assert.That(sut.GetFactors(primeCache).ToArray(), Is.EqualTo(expected));
         }
     }
 }

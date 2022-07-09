@@ -66,5 +66,33 @@ namespace ProjectEuler.Common
 
             return factors;
         }
+
+        public IEnumerable<long> GetFactors(PrimeCache primeCache)
+        {
+            if (_value == 0)
+                return Enumerable.Empty<long>();
+            
+            var factors = new List<long> {1};
+
+            if (_value == 1)
+                return factors;
+            
+            // Get prime factors then multiply by all combinations of 0 and 1
+            var primeFactors = GetPrimeFactors(primeCache).ToArray();
+            
+            for (var i = 0; i < Math.Pow(2, primeFactors.Length); ++i)
+            {
+                long factor = 1;
+                var mask = new NaturalNumber(i).GetDigits(2).ToArray();
+                for (var j = 0; j < mask.Length; ++j)
+                {
+                    factor *= Math.Max(primeFactors[j] * mask[j], 1);
+                }
+                
+                factors.Add(factor); 
+            }
+
+            return factors.Distinct();
+        }
     }
 }
