@@ -5,14 +5,14 @@ using System.Linq;
 namespace ProjectEuler.Common
 {
     /// <summary>
-    /// Cache for generating ordered arrays of prime numbers, up to a given value.
+    /// Generates and caches ordered arrays of prime numbers, up to a given value.
     /// </summary>
     /// <remarks>
     /// Not thread safe.
     /// </remarks>
-    public sealed class PrimeCache : SequenceCache
+    public sealed class PrimeGenerator : CachedSequenceGenerator
     {
-        public PrimeCache(long maxValue = 2)
+        public PrimeGenerator(long maxValue = 2)
             => GenerateSequence(maxValue);
 
         protected override void GenerateNextValue()

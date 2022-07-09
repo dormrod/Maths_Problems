@@ -5,7 +5,7 @@ namespace ProjectEuler.Common
     /// <summary>
     /// Cache for generating ordered sequences, up to a given value.
     /// </summary>
-    public interface ISequenceCache
+    public interface ISequenceGenerator
     {
         /// <summary>
         /// Get next value in sequence after the provided value. 
@@ -16,10 +16,5 @@ namespace ProjectEuler.Common
         /// Get all values in sequence up to the provided value.
         /// </summary>
         IEnumerable<long> GetValues(long maxValue);
-        
-        /// <summary>
-        /// Get entire cache.
-        /// </summary>
-        IEnumerable<long> GetCache();
     }
 }

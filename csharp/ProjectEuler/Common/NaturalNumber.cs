@@ -102,7 +102,7 @@ namespace ProjectEuler.Common
             return digits;
         }
         
-        public IEnumerable<long> GetPrimeFactors(PrimeCache primeCache)
+        public IEnumerable<long> GetPrimeFactors(PrimeGenerator primeGenerator)
         {
             if (Value == 0)
                 return Enumerable.Empty<long>();
@@ -114,7 +114,7 @@ namespace ProjectEuler.Common
             var maxPrime = Math.Min(Value, 1000);
             while (currentValue != 1)
             {
-                var primes = primeCache.GetValues(maxPrime);
+                var primes = primeGenerator.GetValues(maxPrime);
                 foreach (var prime in primes)
                 {
                     while (currentValue % prime == 0)
@@ -133,7 +133,7 @@ namespace ProjectEuler.Common
             return factors;
         }
 
-        public IEnumerable<long> GetFactors(PrimeCache primeCache)
+        public IEnumerable<long> GetFactors(PrimeGenerator primeGenerator)
         {
             if (Value == 0)
                 return Enumerable.Empty<long>();
@@ -144,7 +144,7 @@ namespace ProjectEuler.Common
                 return factors;
             
             // Get prime factors then multiply by all combinations of 0 and 1
-            var primeFactors = GetPrimeFactors(primeCache).ToArray();
+            var primeFactors = GetPrimeFactors(primeGenerator).ToArray();
             
             for (var i = 0; i < Math.Pow(2, primeFactors.Length); ++i)
             {

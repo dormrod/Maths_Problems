@@ -9,12 +9,12 @@ namespace ProjectEuler
     [TestFixture]
     public class Solutions
     {
-        private PrimeCache _primeCache;
+        private PrimeGenerator _primeGenerator;
     
         [OneTimeSetUp]
         public void Setup()
         {
-            _primeCache = new PrimeCache();
+            _primeGenerator = new PrimeGenerator();
         }
         
         [TestCase(10, 23)]
@@ -44,7 +44,7 @@ namespace ProjectEuler
         [TestCase(600851475143, 6857)]
         public void Problem3(long value, int expected)
         {
-            var answer = new NaturalNumber(value).GetPrimeFactors(_primeCache).Last();
+            var answer = new NaturalNumber(value).GetPrimeFactors(_primeGenerator).Last();
 
             Assert.That(answer, Is.EqualTo(expected));
         }
@@ -78,7 +78,7 @@ namespace ProjectEuler
             var answer = Enumerable.Range(1, max)
                 .SelectMany(i =>
                     new NaturalNumber(i)
-                        .GetPrimeFactors(_primeCache)
+                        .GetPrimeFactors(_primeGenerator)
                         .Select(Convert.ToInt32)
                         .GroupBy(f => f)
                         .Select(g => new KeyValuePair<int, int>(g.Key, g.Count())))
@@ -116,7 +116,7 @@ namespace ProjectEuler
             var maxPrime = 10000;
             while (primes.Length < n)
             {
-                primes = _primeCache.GetValues(maxPrime).ToArray();
+                primes = _primeGenerator.GetValues(maxPrime).ToArray();
                 maxPrime *= 10;
             }
 
@@ -189,7 +189,7 @@ namespace ProjectEuler
         [TestCase(2_000_000, 142913828922)]
         public void Problem10(int max, long expected)
         {
-            var answer = _primeCache.GetValues(max).Sum();
+            var answer = _primeGenerator.GetValues(max).Sum();
             
             Assert.That(answer, Is.EqualTo(expected));
         }
@@ -278,7 +278,7 @@ namespace ProjectEuler
         {
             var answer = Enumerable.Range(0, int.MaxValue)
                 .Select(i => i * (i + 1) / 2)
-                .First(i => new NaturalNumber(i).GetFactors(_primeCache).Count() > minDivisors);
+                .First(i => new NaturalNumber(i).GetFactors(_primeGenerator).Count() > minDivisors);
 
             Assert.That(answer, Is.EqualTo(expected));
         }

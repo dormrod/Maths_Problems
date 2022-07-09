@@ -13,11 +13,11 @@ namespace ProjectEuler
         [TestCase(new long[] {2, 5, 10, 97, 100})]
         [TestCase(new long[] {2, 5, 10, 32, 41, 42, 97, 100})]
         [TestCase(new long[] {2, 2, 5, 4, 10, 32, 41, 42, 17, 17, 97, 100})]
-        public void PrimeCache_GeneratesPrimesUpTo100_Successfully(long[] maxValues)
+        public void PrimeGenerator_GeneratesPrimesUpTo100_Successfully(long[] maxValues)
         {
             var expected = new long[] {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97};
 
-            var sut = new PrimeCache();
+            var sut = new PrimeGenerator();
             foreach (var maxValue in maxValues)
             {
                 var _  = sut.GetValues(maxValue).ToArray();
@@ -32,9 +32,9 @@ namespace ProjectEuler
         [TestCase(1_000_000)]
         [TestCase(10_000_000)]
         [TestCase(100_000_000, Explicit = true, Reason = "Relatively long running (<1m)")]
-        public void PrimeCache_GeneratesLargeNumberOfPrimes_SuccessfullyWithoutOutOfMemoryException(long maxValue)
+        public void PrimeGenerator_GeneratesLargeNumberOfPrimes_SuccessfullyWithoutOutOfMemoryException(long maxValue)
         {
-            var sut = new PrimeCache();
+            var sut = new PrimeGenerator();
 
             Assert.DoesNotThrow(() => sut.GetValues(maxValue).ToArray());
         }
@@ -43,11 +43,11 @@ namespace ProjectEuler
         [TestCase(41)]
         [TestCase(1000)]
         
-        public void PrimeCache_GeneratesNextThreePrimesAfter100_Successfully(long startingValue)
+        public void PrimeGenerator_GeneratesNextThreePrimesAfter100_Successfully(long startingValue)
         {
             var expected = new long[] {101, 103, 107};
             
-            var sut = new PrimeCache(startingValue);
+            var sut = new PrimeGenerator(startingValue);
 
             var next1 = sut.NextValue(100);
             var next2 = sut.NextValue(next1);
@@ -62,9 +62,9 @@ namespace ProjectEuler
         [TestCase(1_000_000)]
         [TestCase(10_000_000)]
         [TestCase(100_000_000, Explicit = true, Reason = "Relatively long running (<1m)")]
-        public void PrimeCache_GeneratesNextPrimeAfterALargeNumberOfPrimes_SuccessfullyWithoutOutOfMemoryException(long maxValue)
+        public void PrimeGenerator_GeneratesNextPrimeAfterALargeNumberOfPrimes_SuccessfullyWithoutOutOfMemoryException(long maxValue)
         {
-            var sut = new PrimeCache();
+            var sut = new PrimeGenerator();
 
             Assert.DoesNotThrow(() => sut.NextValue(maxValue));
         }
@@ -122,11 +122,11 @@ namespace ProjectEuler
         [TestCase(1_000_001, new long[] {101, 9901})]
         public void NaturalNumber_CanGetPrimeFactors_Successfully(long value, long[] expected)
         {
-            var primeCache = new PrimeCache();
+            var primeGenerator = new PrimeGenerator();
             
             var sut = new NaturalNumber(value);
             
-            Assert.That(sut.GetPrimeFactors(primeCache).ToArray(), Is.EqualTo(expected));
+            Assert.That(sut.GetPrimeFactors(primeGenerator).ToArray(), Is.EqualTo(expected));
         }
         
         [TestCase(0, new long[0])]
@@ -139,11 +139,11 @@ namespace ProjectEuler
         [TestCase(1000001, new long[] {1, 101, 9901, 1000001})]
         public void NaturalNumber_CanGetFactors_Successfully(long value, long[] expected)
         {
-            var primeCache = new PrimeCache();
+            var primeGenerator = new PrimeGenerator();
             
             var sut = new NaturalNumber(value);
             
-            Assert.That(sut.GetFactors(primeCache).ToArray(), Is.EqualTo(expected));
+            Assert.That(sut.GetFactors(primeGenerator).ToArray(), Is.EqualTo(expected));
         }
         
         [TestCase(0, 0, 0)] 

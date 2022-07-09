@@ -1,21 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Emit;
 
 namespace ProjectEuler.Common
 {
     /// <summary>
-    /// Cache for generating ordered sequences, up to a given value.
+    /// Generates and caches ordered sequences, up to a given value.
     /// </summary>
     /// <remarks>
     /// Not thread safe.
     /// </remarks>
-    public abstract class SequenceCache : ISequenceCache
+    public abstract class CachedSequenceGenerator : ISequenceGenerator
     {
         protected long[] Sequence;
 
-        protected SequenceCache()
+        protected CachedSequenceGenerator()
         {
             Sequence = Array.Empty<long>();
         }
