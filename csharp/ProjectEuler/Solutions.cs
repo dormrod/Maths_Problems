@@ -10,11 +10,13 @@ namespace ProjectEuler
     public class Solutions
     {
         private PrimeGenerator _primeGenerator;
+        private FibonacciGenerator _fibonacciGenerator;
     
         [OneTimeSetUp]
         public void Setup()
         {
             _primeGenerator = new PrimeGenerator();
+            _fibonacciGenerator = new FibonacciGenerator();
         }
         
         [TestCase(10, 23)]
@@ -32,9 +34,9 @@ namespace ProjectEuler
         [TestCase(4000000, 4613732)]
         public void Problem2(int cutoff, int expected)
         {
-            var answer = SolutionHelpers.FibonacciSequence(cutoff)
-                .Where(x => x.Value % 2 == 0)
-                .Sum(x => x.Value);
+            var answer = _fibonacciGenerator.GetValues(cutoff)
+                .Where(x => x % 2 == 0)
+                .Sum(x => x);
 
             Assert.That(answer, Is.EqualTo(expected));
         }

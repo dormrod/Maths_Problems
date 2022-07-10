@@ -42,10 +42,11 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Common\FibonacciGenerator.cs" />
         <Compile Include="Common\ISequenceGenerator.cs" />
         <Compile Include="Common\NaturalNumber.cs" />
         <Compile Include="Common\PrimeGenerator.cs" />
-        <Compile Include="Common\SequenceGenerator.cs" />
+        <Compile Include="Common\CachedSequenceGenerator.cs" />
         <Compile Include="SolutionHelpers.cs" />
         <Compile Include="Solutions.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />

@@ -68,6 +68,30 @@ namespace ProjectEuler
 
             Assert.DoesNotThrow(() => sut.NextValue(maxValue));
         }
+        
+        [Test]
+        public void FibonacciGenerator_GeneratesSequenceUpTo100_Successfully()
+        {
+            var expected = new long[] {1, 2, 3, 5, 8, 13, 21, 34, 55, 89};
+            
+            var sut = new FibonacciGenerator();
+
+            var actual = sut.GetValues(100);
+
+            Assert.That(actual, Is.EquivalentTo(expected));
+        }
+        
+        [TestCase(54, 55)]
+        [TestCase(55, 89)]
+        [TestCase(56, 89)]
+        public void FibonacciGenerator_GeneratesNextNumberInSequence_Successfully(long current, long expected)
+        {
+            var sut = new FibonacciGenerator();
+
+            var actual = sut.NextValue(current);
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
 
         [TestCase(0)]
         [TestCase(1)]
