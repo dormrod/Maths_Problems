@@ -11,12 +11,14 @@ namespace ProjectEuler
     {
         private PrimeGenerator _primeGenerator;
         private FibonacciGenerator _fibonacciGenerator;
+        private CollatzGenerator _collatzGenerator;
     
         [OneTimeSetUp]
         public void Setup()
         {
             _primeGenerator = new PrimeGenerator();
             _fibonacciGenerator = new FibonacciGenerator();
+            _collatzGenerator = new CollatzGenerator();
         }
         
         [TestCase(10, 23)]
@@ -400,6 +402,40 @@ namespace ProjectEuler
                 .Take(10);
 
             Assert.That(values, Is.EquivalentTo(new [] { 5, 5, 3, 7, 3, 7, 6, 2, 3, 0 }));
+        }
+        
+        [TestCase(10, 9)]
+        [TestCase(1000000, 837799)]
+        public void Problem14(int maxValue, int expected)
+        {
+            var maxTerms = 0;
+            var answer = 0;
+            var nTerms = new int[maxValue + 1];
+            
+            for (int i = 1; i <= maxValue; ++i)
+            {
+                long j = i;
+                var k = 1;
+                while (j != 1)
+                {
+                    j = _collatzGenerator.NextValue(j);
+                    if (j <= maxValue && nTerms[j] > 0)
+                    {
+                        k += nTerms[j];
+                        break;
+                    }
+                    ++k;
+                }
+
+                nTerms[i] = k;
+                if (k > maxTerms)
+                {
+                    maxTerms = k;
+                    answer = i;
+                }
+            }
+            
+            Assert.That(answer, Is.EqualTo(expected));
         }
     }
 }

@@ -92,6 +92,30 @@ namespace ProjectEuler
 
             Assert.That(actual, Is.EqualTo(expected));
         }
+        
+        [TestCase(1, new long[] {1})]
+        [TestCase(13, new long[] {13, 40, 20, 10, 5, 16, 8, 4 , 2, 1})]
+        public void CollatzGenerator_GeneratesSequences_Successfully(long value, long[] expected)
+        {
+            var sut = new CollatzGenerator();
+
+            var actual = sut.GetValues(value);
+
+            Assert.That(actual, Is.EquivalentTo(expected));
+        }
+        
+        [TestCase(1, 4)]
+        [TestCase(2, 1)]
+        [TestCase(3, 10)]
+        [TestCase(4, 2)]
+        public void CollatzGenerator_GeneratesNextNumberInSequence_Successfully(long current, long expected)
+        {
+            var sut = new CollatzGenerator();
+
+            var actual = sut.NextValue(current);
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
 
         [TestCase(0)]
         [TestCase(1)]
