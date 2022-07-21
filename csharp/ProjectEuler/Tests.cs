@@ -207,5 +207,21 @@ namespace ProjectEuler
             
             Assert.That(actual.Value, Is.EqualTo(expected));
         }
+        
+        [TestCase(0, 0, 0)] 
+        [TestCase(1, 2, 2)] 
+        [TestCase(2, 1, 2)] 
+        [TestCase(4, 11, 44)] 
+        [TestCase(10, 100, 1000)] 
+        [TestCase(42, 199, 8358)] 
+        [TestCase(1_000_099, 99, 99_010_801)] 
+        public void NaturalNumber_CanMultiplyValues_Successfully(long value1, long value2, long expected)
+        {
+            var sut = new NaturalNumber(value1);
+
+            var actual = sut.Multiply(new NaturalNumber(value2));
+            
+            Assert.That(actual.Value, Is.EqualTo(expected));
+        }
     }
 }

@@ -72,6 +72,41 @@ namespace ProjectEuler.Common
             return new NaturalNumber(value);
         }
         
+        public NaturalNumber Multiply(NaturalNumber number)
+        {
+            var thisDigits = GetDigits().ToArray();
+            var otherDigits = number.GetDigits().ToArray();
+            var multipliedDigits = new int[thisDigits.Length + otherDigits.Length];
+
+            for (int i = 0; i < thisDigits.Length; ++i)
+            {
+                for (int j = 0; j < otherDigits.Length; ++j)
+                {
+                    multipliedDigits[i + j] += thisDigits[i] * otherDigits[j];
+                }
+            }
+            
+            for (int i = 0; i < multipliedDigits.Length - 1; ++i)
+            {
+                var j = 0;
+                var power10 = 10;
+                var quotient = multipliedDigits[i] / power10;
+                while (quotient != 0)
+                {
+                    multipliedDigits[i + ++j] += quotient;
+                    power10 *= 10;
+                    quotient = multipliedDigits[i] / power10;
+                }
+                
+                var remainder = multipliedDigits[i] % 10;
+                multipliedDigits[i] = remainder;
+            }
+
+            var value = string.Join(string.Empty, multipliedDigits.Reverse().Select(d => d.ToString()));
+
+            return new NaturalNumber(value);
+        }
+       
         public long Value
             => _value ?? throw new InvalidCastException("Value is too large to be represented as an integer.");
 
