@@ -477,5 +477,20 @@ namespace ProjectEuler
             
             Assert.That(answer, Is.EqualTo(expected));
         }
+        
+        [TestCase(5, 19)]
+        [TestCase(1000, 21124)]
+        public void Problem17(int max, int expected)
+        {
+            var answer = Enumerable.Range(1, max)
+                .Select(i => new NaturalNumber(i)
+                    .GetWrittenForm()
+                    .Replace(" ", string.Empty)
+                    .Replace("-", string.Empty)
+                    .Length)
+                .Sum();
+            
+            Assert.That(answer, Is.EqualTo(expected));
+        }
     }
 }
