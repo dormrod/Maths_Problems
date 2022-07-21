@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace ProjectEuler.Common
@@ -14,7 +15,7 @@ namespace ProjectEuler.Common
         
         private readonly long? _value;
         private int[] _digits;
-        
+
         public NaturalNumber(long value)
         {
             if (value < 0)
@@ -194,6 +195,69 @@ namespace ProjectEuler.Common
             }
 
             return factors.Distinct();
+        }
+
+        private static readonly string[] UnitsWordMap = new[]
+        {
+            "", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+            "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"
+        };
+        
+        private static readonly string[] TensWordMap = new[] {"", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
+
+        private static readonly Dictionary<int, string> PowersOfTenWordMap = new Dictionary<int, string>()
+            {{1, "ten"}, {2, "hundred"}, {3, "thousand"}, {6, "million"}, {9, "billion"}};
+        
+        public string GetWrittenForm()
+        {
+            if (Value == 0)
+                return "zero";
+            
+            return NumberToWrittenForm(Value);
+
+            string NumberToWrittenForm(long value)
+            {
+                var writtenForm = string.Empty;
+                
+                if (value / 1_000_000_000 > 0)
+                {
+                    writtenForm += $"{NumberToWrittenForm(value / 1_000_000_000)} {PowersOfTenWordMap[9]} ";
+                    value %= 1_000_000_000;
+                }
+                
+                if (value / 1_000_000 > 0)
+                {
+                    writtenForm += $"{NumberToWrittenForm(value / 1_000_000)} {PowersOfTenWordMap[6]} ";
+                    value %= 1_000_000;
+                }
+                
+                if (value / 1_000 > 0)
+                {
+                    writtenForm += $"{NumberToWrittenForm(value / 1_000)} {PowersOfTenWordMap[3]} ";
+                    value %= 1_000;
+                }
+                
+                if (value / 100 > 0)
+                {
+                    writtenForm += $"{NumberToWrittenForm(value / 100)} {PowersOfTenWordMap[2]} ";
+                    value %= 100;
+                }
+
+                if (writtenForm != string.Empty && value != 0)
+                    writtenForm += "and ";
+
+                if (value < 20)
+                {
+                    writtenForm += UnitsWordMap[value];
+                }
+                else
+                {
+                    var unit = NumberToWrittenForm(value % 10);
+                    writtenForm += $"{TensWordMap[value / 10 % 10]}{(unit != string.Empty ? "-" : string.Empty)}{unit}";
+                }
+
+                return writtenForm.Trim();
+            }
         }
     }
 }

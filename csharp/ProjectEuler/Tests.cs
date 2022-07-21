@@ -223,5 +223,25 @@ namespace ProjectEuler
             
             Assert.That(actual.Value, Is.EqualTo(expected));
         }
+        
+        [TestCase(0, "zero")] 
+        [TestCase(1, "one")] 
+        [TestCase(10, "ten")] 
+        [TestCase(11, "eleven")] 
+        [TestCase(20, "twenty")] 
+        [TestCase(55, "fifty-five")] 
+        [TestCase(142, "one hundred and forty-two")] 
+        [TestCase(7312, "seven thousand three hundred and twelve")] 
+        [TestCase(15003, "fifteen thousand and three")] 
+        [TestCase(200014, "two hundred thousand and fourteen")] 
+        [TestCase(99_350_218_629, "ninety-nine billion three hundred and fifty million two hundred and eighteen thousand six hundred and twenty-nine")] 
+        public void NaturalNumber_CanBeConvertedToWrittenForm_Successfully(long value, string expected) 
+        {
+            var sut = new NaturalNumber(value);
+
+            var actual = sut.GetWrittenForm();
+            
+            Assert.That(actual, Is.EqualTo(expected));
+        }
     }
 }
