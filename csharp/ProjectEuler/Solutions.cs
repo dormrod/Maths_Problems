@@ -437,5 +437,45 @@ namespace ProjectEuler
             
             Assert.That(answer, Is.EqualTo(expected));
         }
+        
+        [TestCase(1, 2)]
+        [TestCase(2, 6)]
+        [TestCase(20, 137846528820)]
+        public void Problem15(int dimension, long expected)
+        {
+            var paths = new long[dimension + 1, dimension + 1];
+            paths[0, 1] = 1;
+            paths[1, 0] = 1;
+            paths[1, 1] = 2;
+            for (long i = 2; i <= dimension; ++i)
+            {
+                paths[i, 0] = paths[i - 1, 0];
+                paths[0, i] = paths[0, i - 1];
+                for (long j = 1; j <= i; ++j)
+                {
+                    paths[i, j] = paths[i, j - 1] + paths[i - 1, j];
+                    paths[j, i] = paths[i, j];
+                }
+            }
+
+            var answer = paths[dimension, dimension];
+            
+            Assert.That(answer, Is.EqualTo(expected));
+        }
+        
+        [TestCase(1, 2)]
+        [TestCase(10, 7)]
+        [TestCase(15, 26)]
+        [TestCase(1000, 1366)]
+        public void Problem16(int power, int expected)
+        {
+            var two = new NaturalNumber(2);
+            var answer = Enumerable.Range(0, power)
+                .Aggregate(new NaturalNumber(1), (x, _) => x.Multiply(two))
+                .GetDigits()
+                .Sum();
+            
+            Assert.That(answer, Is.EqualTo(expected));
+        }
     }
 }
